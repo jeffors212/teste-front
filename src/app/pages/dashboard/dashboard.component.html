@@ -1,0 +1,23 @@
+<div class="container mt-4">
+  <h2>Competition</h2>
+  <div *ngFor="let competition of competitions" class="card mt-3">
+      <div class="card-body">
+          <h5 class="card-title">{{ competition.name }} - {{ competition.type }}</h5>
+          <p *ngIf="competition.status === 'active'" class="text-success">Ativa</p>
+          <p *ngIf="competition.status === 'finished'" class="text-danger">Finalizada</p>
+
+          <button class="btn btn-primary btn-sm" (click)="goToPage()">
+              <fa-icon icon="user-plus"></fa-icon> Adicionar Atleta
+          </button>
+          <button class="btn btn-secondary btn-sm" (click)="goToAthleteList()">
+              <fa-icon icon="users"></fa-icon> Listar Atletas
+          </button>
+
+
+
+          <p *ngIf="competition.status === 'finished'">
+              Ganhador: {{ competition.winner }}
+          </p>
+      </div>
+  </div>
+</div>

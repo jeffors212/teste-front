@@ -1,0 +1,25 @@
+<div #breadcrumb class="breadcrumb breadcrumb-container" [ngClass]="[sticky? 'sticky' : '']">
+
+  <nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <ng-container *ngFor="let breadcrumb of breadcrumbs; let i = index;">
+        <li class="breadcrumb-item"
+            [ngStyle]="{'text-transform': text_transform}"
+            [ngClass]="{active: breadcrumbs.length -1 == i}">
+          <a [routerLink]="[breadcrumb.url]">{{breadcrumb.name}}</a>
+        </li>
+
+      </ng-container>
+
+    </ol>
+  </nav>
+
+  <div *ngIf="center_content" class="breadcrumb-center-content">
+    <ng-container  *ngTemplateOutlet="center_content"></ng-container>
+  </div>
+  <span *ngIf="!center_content && right_content" style="flex: 2;"></span>
+  <div *ngIf="right_content" class="breadcrumb-right-content">
+    <ng-container  *ngTemplateOutlet="right_content"></ng-container>
+  </div>
+
+</div>

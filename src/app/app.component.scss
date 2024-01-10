@@ -1,0 +1,76 @@
+.loading {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  flex-direction: column;
+  transition: opacity 300ms ease, visibility 0ms ease 300ms;
+  backdrop-filter: blur(5px);
+  cursor: wait;
+}
+
+.loading .message {
+  font-size: 1.4rem;
+  animation: blink 1s linear infinite;
+  color: #f1f1f1;
+}
+
+.loading.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+._content {
+  display: block;
+  height: 100%;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.debug {
+  position: absolute;
+  z-index: 2000;
+  /*transform: translateX(-50%);*/
+  left: 5px;
+  bottom: 7px;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  opacity: 0.8;
+  transition: opacity ease-in-out 200ms;
+  line-height: 1;
+  display: flex;
+  /*max-width: 150px;*/
+  flex-wrap: wrap;
+}
+
+.debug:hover {
+  opacity: 1;
+}
+
+.debug .timer {
+  /*min-width: 150px;*/
+  padding: 5px;
+}
+
+.debug .timer:not(:last-child) {
+  border-right: 1px solid var(--alert-primary-border-color);
+  padding-right: 5px;
+  margin-right: 5px;
+}
+
+.debug .clicable {
+  cursor: pointer;
+}
+

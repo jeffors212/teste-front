@@ -1,0 +1,206 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "template-teste-frontend-angular": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/template-teste-frontend-angular",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.png",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss",
+              "src/assets/bootstrap.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "projects/hub-fonts/src/fonts/hub-fonts.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2mb",
+                  "maximumError": "4mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "template-teste-frontend-angular:build:production"
+            },
+            "development": {
+              "browserTarget": "template-teste-frontend-angular:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "template-teste-frontend-angular:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "@hub/hub-ng-sidebar": {
+      "projectType": "library",
+      "root": "projects/hub/hub-ng-sidebar",
+      "sourceRoot": "projects/hub/hub-ng-sidebar/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/hub/hub-ng-sidebar/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/hub/hub-ng-sidebar/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/hub/hub-ng-sidebar/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/hub/hub-ng-sidebar/src/test.ts",
+            "tsConfig": "projects/hub/hub-ng-sidebar/tsconfig.spec.json",
+            "karmaConfig": "projects/hub/hub-ng-sidebar/karma.conf.js"
+          }
+        }
+      }
+    },
+    "@hub/hub-fonts": {
+      "projectType": "library",
+      "root": "projects/hub/hub-fonts",
+      "sourceRoot": "projects/hub/hub-fonts/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/hub/hub-fonts/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/hub/hub-fonts/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/hub/hub-fonts/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/hub/hub-fonts/src/test.ts",
+            "tsConfig": "projects/hub/hub-fonts/tsconfig.spec.json",
+            "karmaConfig": "projects/hub/hub-fonts/karma.conf.js"
+          }
+        }
+      }
+    },
+    "@hub/hub-ng-breadcrumb-menu": {
+      "projectType": "library",
+      "root": "projects/hub/hub-ng-breadcrumb-menu",
+      "sourceRoot": "projects/hub/hub-ng-breadcrumb-menu/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/hub/hub-ng-breadcrumb-menu/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/hub/hub-ng-breadcrumb-menu/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/hub/hub-ng-breadcrumb-menu/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/hub/hub-ng-breadcrumb-menu/src/test.ts",
+            "tsConfig": "projects/hub/hub-ng-breadcrumb-menu/tsconfig.spec.json",
+            "karmaConfig": "projects/hub/hub-ng-breadcrumb-menu/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "bfc2dacc-7449-4584-92ce-986701a46b20"
+  }
+}

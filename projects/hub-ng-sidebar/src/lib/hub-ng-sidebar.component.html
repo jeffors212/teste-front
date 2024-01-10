@@ -1,0 +1,207 @@
+<nav class="aside" [ngClass]="{collapsed: collapsed, 'touch': touch_mode}">
+
+  <div class="aside-logged" *ngIf="user_section"
+       [ngClass]="{hide: !user_section.show}">
+    <div class="content">
+      <div class="user"
+           (click)="toggle($event)"
+           [style.grid-template-columns]="((user_section.avatar || default_avatar) && !collapsed) ? 'auto 1fr' : '1fr'">
+
+        <div class="avatar-container rounded-circle"
+             *ngIf="user_section.avatar || default_avatar"
+             [tooltipPlacement]="tooltip_placement"
+             [tooltip]="collapsed ? user_section.name : '' "
+             (click)="_on_avatar_click($event)"
+             [container]="'body'">
+          <span class="avatar" [style.background-image]="get_avatar_url()"></span>
+        </div>
+
+        <div class="section"
+             [style.grid-template-columns]="(user_section.menu && user_section.menu.length > 0) ? '1fr auto' : '1fr'">
+          <span class="name" *ngIf="!collapsed || (collapsed && !(user_section.avatar || default_avatar))">
+            <span class="first-letter"
+                  [tooltipPlacement]="tooltip_placement"
+                  [tooltip]="collapsed ? user_section.name : '' "
+                  [container]="'body'">{{user_section.name[0]}}</span>
+                  <span class="other-letters">{{user_section.name.substring(1)}}</span>
+          </span>
+
+          <ng-container *ngIf="user_section.menu && user_section.menu.length > 0">
+            <i class="toggle-icon toggle-icon-right fal fa-angle-right"></i>
+            <i class="toggle-icon toggle-icon-down fal fa-angle-down"></i>
+          </ng-container>
+
+          <div class="actions"
+               *ngIf="user_section.actions && user_section.actions.length > 0"
+               [style.grid-template-columns]="get_user_action_grid(user_section.actions)">
+            <ng-container *ngFor="let action of user_section.actions">
+              <ng-container *ngIf="action.routeLink">
+                <a [routerLink]="[action.routeLink]"
+                   [queryParams]="action.queryParams|| {}"
+                   [container]="'body'"
+                   [tooltipPlacement]="tooltip_placement"
+                   [tooltip]="action.tooltip ? action.tooltip : ''">
+                  <i class="{{action.icon}}"></i>
+                </a>
+              </ng-container>
+              <ng-container *ngIf="action.on_click">
+                <a (click)="trigger_on_click(action, $event)"
+                   [container]="'body'"
+                   [tooltipPlacement]="tooltip_placement"
+                   [tooltip]="action.tooltip ? action.tooltip : ''">
+                  <i class="{{action.icon}}"></i>
+                </a>
+              </ng-container>
+            </ng-container>
+          </div>
+
+        </div>
+      </div>
+
+      <ul class="menu nav nav-aside">
+        <ng-container *ngFor="let item of user_section.menu">
+          <ng-container *ngTemplateOutlet="item_template; context:{ item: item, level: 0 }"></ng-container>
+        </ng-container>
+      </ul>
+
+    </div>
+
+    <div class="nav-item-label">
+      <hr/>
+    </div>
+
+  </div>
+
+  <div class="aside-body">
+    <ul class="nav nav-aside">
+      <ng-container *ngFor="let item of items">
+        <ng-container *ngTemplateOutlet="item_template; context:{ item: item, level: 0 }"></ng-container>
+      </ng-container>
+    </ul>
+
+  </div>
+
+  <ng-template #item_template let-item="item" let-level="level">
+
+    <li *ngIf="check_roles(item.roles)" [ngClass]="{
+          'nav-item-label': is_separator(item) == 'line',
+          'nav-item-label-text': is_separator(item) == 'label',
+          'nav-item': !is_separator(item),
+          'with-sub': !!item.submenu
+          }"
+        [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact: item.match_type !== 'prefix'}"
+    >
+
+      <ng-container *ngIf="is_separator(item)">
+        <ng-container *ngIf="item.type == 'label' && !collapsed">
+          <span
+            [style.padding-inline-start]="start_padding + (level_padding * level) + level_padding_unit"
+          >
+            <i *ngIf="item.icon" class="nav-icon" [class]="item.icon"></i>
+            <div class="nav-label"><span>{{item.label}}</span></div>
+          </span>
+        </ng-container>
+        <ng-container *ngIf="item.type == 'line' || collapsed">
+          <hr/>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="!is_separator(item)">
+        <ng-container *ngIf="!item.submenu">
+          <a class="nav-link"
+             [routerLink]="[item.routeLink]"
+             [queryParams]="item.queryParams|| {}"
+             (click)="trigger_on_click(item)"
+             [style.padding-inline-start]="start_padding + (level_padding * level) + level_padding_unit"
+             [tooltipPlacement]="tooltip_placement"
+             [tooltip]="collapsed && item.tooltip ? item.tooltip : collapsed ? item.label : '' "
+             [container]="'body'"
+          >
+            <i *ngIf="item.icon"
+               [tooltipPlacement]="tooltip_placement"
+               [tooltip]="!collapsed && item.tooltip? item.tooltip: '' " class="nav-icon"
+               [container]="'body'"
+               [class]="item.icon"></i>
+            <div class="nav-label">
+              <span>
+                <span class="first-letter">{{item.label[0]}}</span>
+                <span class="other-letters">{{item.label.substring(1)}}</span>
+              </span>
+            </div>
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="item.submenu">
+          <ng-container *ngIf="item.routeLink">
+            <a class="nav-link nav-toggle-submenu"
+               [routerLink]="[item.routeLink]" [queryParams]="item.queryParams|| {}"
+               (click)="toggle_submenu($event, item.routeLink)"
+               [style.padding-inline-start]="start_padding + (level_padding * level) + level_padding_unit"
+               [tooltipPlacement]="tooltip_placement"
+               [tooltip]="collapsed && item.tooltip ? item.tooltip : collapsed ? item.label : '' "
+               [container]="'body'"
+            >
+
+              <i *ngIf="item.icon"
+                 [tooltipPlacement]="tooltip_placement"
+                 [tooltip]="!collapsed && item.tooltip? item.tooltip: '' " class="nav-icon"
+                 [container]="'body'"
+                 [class]="item.icon"></i>
+              <span class="nav-label">
+                <span>
+                  <span class="first-letter">{{item.label[0]}}</span>
+                  <span class="other-letters">{{item.label.substring(1)}}</span>
+                </span>
+                <ng-container *ngIf="item.submenu.length > 0">
+                  <i class="toggle-icon toggle-icon-right fal fa-angle-right"></i>
+                  <i class="toggle-icon toggle-icon-down fal fa-angle-down"></i>
+                </ng-container>
+            </span>
+            </a>
+          </ng-container>
+          <ng-container *ngIf="!item.routeLink">
+            <a class="nav-link nav-toggle-submenu"
+               (click)="toggle_submenu($event, item.routeLink)"
+               [style.padding-inline-start]="start_padding + (level_padding * level) + level_padding_unit"
+               [tooltipPlacement]="tooltip_placement"
+               [tooltip]="collapsed && item.tooltip ? item.tooltip : collapsed ? item.label : '' "
+               [container]="'body'"
+            >
+
+              <i *ngIf="item.icon"
+                 [tooltipPlacement]="tooltip_placement"
+                 [tooltip]="!collapsed && item.tooltip? item.tooltip: '' " class="nav-icon"
+                 [container]="'body'"
+                 [class]="item.icon"></i>
+              <span class="nav-label">
+                <span>
+                  <span class="first-letter">{{item.label[0]}}</span>
+                  <span class="other-letters">{{item.label.substring(1)}}</span>
+                </span>
+                <ng-container *ngIf="item.submenu.length >0">
+                  <i class="toggle-icon toggle-icon-right fal fa-angle-right"></i>
+                  <i class="toggle-icon toggle-icon-down fal fa-angle-down"></i>
+                </ng-container>
+            </span>
+            </a>
+          </ng-container>
+
+        </ng-container>
+
+
+        <ng-container *ngIf="item.submenu">
+          <ul class="nav-aside">
+            <ng-container *ngFor="let sub_item of item.submenu">
+              <ng-container *ngTemplateOutlet="item_template; context:{ item: sub_item, level: level +1 }"></ng-container>
+            </ng-container>
+          </ul>
+        </ng-container>
+
+      </ng-container>
+
+    </li>
+  </ng-template>
+
+
+</nav>

@@ -1,0 +1,161 @@
+:root[data-theme="dark"] {
+  --blue: #2447b0;
+  --indigo: #650df2;
+  --purple: #6c3ec1;
+  --pink: #e4448f;
+  --red: #cd5c5c;
+  --orange: #fc7303;
+  --yellow: #ffbf00;
+  --green: #29a847;
+  --teal: hsl(162, 73%, 40%);
+  --cyan: #17a4ba;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+
+  /* Theme Base */
+  --theme-primary: hsl(225, 58%, 29%);
+  --theme-primary-accent: hsl(213, 65%, 87%);
+
+  --theme-secondary: hsl(219, 36%, 17%);
+  --theme-secondary-accent: hsl(219, 20%, 66%);
+
+  --theme-tertiary: hsl(219, 36%, 16%);
+  --theme-tertiary-accent: hsl(219, 20%, 66%);
+
+  --theme-page-background: hsl(219, 37%, 12%);
+  --theme-page-color: hsl(0, 0%, 77%);
+
+  /* Layout Specific */
+  --layout-header-primary: var(--theme-secondary);
+  --layout-header-primary-accent: var(--theme-secondary-accent);
+
+  --layout-sidebar-primary: var(--theme-secondary);
+  --layout-sidebar-primary-accent: var(--theme-secondary-accent);
+
+  --layout-footer-primary: var(--theme-secondary);
+  --layout-footer-primary-accent: var(--theme-secondary-accent);
+
+  /* BS Colors */
+  --primary: var(--theme-primary);
+  --primary-accent: var(--theme-primary-accent);
+
+  --secondary: var(--theme-secondary);
+  --secondary-accent: var(--theme-secondary-accent);
+
+  --success: #024b2f;
+  --success-accent: hsl(0, 0%, 87%);
+
+  --info: hsl(188, 65%, 25%);
+  --info-accent: hsl(0, 0%, 87%);
+
+  --warning: hsl(45, 65%, 29%);
+  --warning-accent: #fff;
+
+  --danger: hsl(354, 65%, 29%);
+  --danger-accent: #fff;
+
+  --light: var(--theme-tertiary);
+  --light-accent: var(--theme-tertiary-accent);
+
+  --dark: hsl(219, 20%, 55%);
+  --dark-accent: hsl(219, 36%, 10%);
+
+  /* Card */
+  --card-background: var(--theme-tertiary);
+  --card-color: var(--theme-tertiary-accent);
+  --card-border-color: rgba(72, 94, 144, 0.3);
+  --card-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12); /* rgba(222, 222, 231, 0.4) */
+  --card-padding: 0.375rem 0.625rem;
+  --card-header-background: rgba(0, 0, 0, 0.07);
+  --card-footer-background: rgba(0, 0, 0, 0.03);
+  /*--card-header-padding: 0.75rem 1.25rem;*/
+  /*--card-header-padding: 0.475rem 0.725rem;*/
+  --card-header-padding: 0.75rem 0.925rem;
+  --card-footer-padding: 0.375rem 0.625rem;
+
+  /* Popover */
+  --popover-background: var(--theme-tertiary);
+  --popover-color: var(--theme-tertiary-accent);
+  --popover-border-color: #3b4863;
+  --popover-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.9), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12); /* rgba(222, 222, 231, 0.4) */
+  --popover-header-background: rgba(0, 0, 0, 0.1);
+
+  /* Inputs */
+  --input-bg: transparent;
+  --input-text: var(--theme-tertiary-accent);
+  --input-border-color: #3b4863;
+  --input-border-radius: 4px;
+  --input-padding: 0.46875rem 0.625rem;
+
+  /* Input Focus */
+  --input-focus-bg: hsla(0, 0%, 0%, 0.1);
+  --input-focus-text: var(--input-text);
+  --input-focus-border-color: var(--input-border-color);
+
+  /* Breadcrumb */
+  --bs-breadcrumb-background: var(--theme-tertiary);
+  --bs-breadcrumb-color: var(--theme-tertiary-accent);
+  --bs-breadcrumb-divider: '/';
+  --bs-breadcrumb-padding: 0.375rem 0.625rem;
+
+  /* Alerts */
+  --alert-padding: 0.375rem 0.625rem;
+
+  --alert-primary-color: var(--theme-primary-accent);
+  --alert-primary-background: var(--theme-primary);
+  --alert-primary-border-color: rgba(255, 255, 255, 0.15);
+
+  --alert-secondary-color: var(--theme-secondary-accent);
+  --alert-secondary-background: var(--theme-secondary);
+  --alert-secondary-border-color: rgba(255, 255, 255, 0.1);
+
+  /* Buttons */
+  --btn-padding: 0.46875rem 0.625rem;
+  --btn-disabled-opacity: 0.6;
+
+  /* Borders */
+  --border-radius: 4px;
+  --border-radius-lg: 4px;
+  --border-radius-sm: 4px;
+
+  /* Modal */
+  /*--modal-background: var(--theme-secondary);*/
+  /*--modal-color: var(--theme-secondary-accent);*/
+  --modal-background: var(--theme-page-background);
+  --modal-color: var(--theme-page-color);
+  --modal-border-color: hsla(221, 25%, 19%, 1);
+  --modal-box-shadow: 0px 0px 15px #000;
+  --modal-backdrop-color: hsla(0, 0%, 0%, 1);
+  --modal-backdrop-show-opacity: 0.7;
+  --modal-backdrop-filter: blur(2x);
+
+  /* Other */
+  --link-color: var(--green);
+  --generic-selected: rgba(0, 0, 0, 0.35);
+  --generic-hover: rgba(0, 0, 0, 0.2);
+  --generic-active: rgba(255, 255, 255, 0.1);
+  --generic-padding: 0.375rem 0.625rem;
+  /*--generic-border-color: rgba(72, 94, 144, 0.16);*/
+  --generic-border-color: rgba(72, 94, 144, 0.25);
+  --layout-border-color: rgba(72, 94, 144, 0.16);
+  /*--generic-padding: 0.75rem 1.25rem;*/
+
+  /* Fonts */
+  /*--font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";*/
+  /*--font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;*/
+}
+
+:root[data-theme="dark"] .on-light {
+  display: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    content: 'dark';
+  }
+}
+
+a::content('dark') {
+
+}

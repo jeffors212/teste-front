@@ -1,0 +1,19 @@
+<div class="loading" [ngClass]="{ hide: !loading }">
+  <!--  <i class="fad fa-spinner fa-spin"></i>-->
+  <img src="assets/loading/breath_white.apng" />
+  <p class="message" *ngIf="loading_message">{{ loading_message }}</p>
+</div>
+
+<div class="debug alert alert-warning" *ngIf="ls.debug">
+  <div>DEBUG</div>
+  <div
+      class="timer clicable"
+      *ngFor="let timer of timers"
+      [tooltip]="'Click here to refresh \'' + timer?.name + '\''"
+      container="body"
+      (click)="timer.on_timeout(timer)"
+  >
+    {{ timer.name }}<br /><small>{{ timer.time_str }}</small>
+  </div>
+</div>
+<router-outlet></router-outlet>

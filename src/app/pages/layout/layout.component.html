@@ -1,0 +1,62 @@
+<div class="main" [ngClass]="{ touch: layout.smartphone }">
+  <nav class="header navbar">
+    <div class="header-left-content">
+      <button class="btn bg-transparent on-phone" (click)="logout()"><i class="fal fa-sign-out"></i></button>
+    </div>
+    <a class="navbar-brand" routerLink="/">
+      <img [src]="client_section.logo" class="header-logo on-light"/>
+      <img [src]="client_section.logo_dark_mode" class="header-logo on-dark"/>
+    </a>
+    <div class="header-right-content">
+      <img src="assets/images/logo_finqi_blue_green.png" class="header-logo on-light on-pc"/>
+      <img src="assets/images/logo_finqi_white.png" class="header-logo on-dark on-pc"/>
+      <div class="header-icons d-flex justify-content-end">
+        <!--        <button class="btn bg-transparent on-pc" (click)="logout()"><i class="fad fa-sign-out"></i></button>-->
+        <button class="btn bg-transparent on-phone" (click)="toggle_sidebar()">
+          <i class="fal fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <hub-ng-sidebar
+    class="side-menu"
+    [default_avatar]="user_avatar_default"
+    [collapsed]="collapsedSidebar"
+    (on_navigate)="on_navigate()"
+    (on_avatar_click)="on_avatar_click($event)"
+    [touch_mode]="layout.smartphone"
+    [ngClass]="{ smartphone: layout.smartphone, hidden: hiddenSidebar }"
+    [items]="menu"
+    [user_section]="user_section"
+  >
+  </hub-ng-sidebar>
+
+  <div class="content">
+    <hub-breadcrumb-menu
+      #breadcrumb
+      base_title="Finqi Mesa"
+      title_separator="|"
+      *ngIf="!layout.smartphone || hiddenSidebar"
+      [style]="{display: !breadcrumb_config.show ? 'none' : 'unset'}"
+      [right_content]="breadcrumb_right"
+      [center_content]="breadcrumb_center"
+      [set_page_title]="true"
+      [sticky]="breadcrumb_config.sticky"
+      [class]="{stuck: breadcrumb_config.stuck}"
+    >
+    </hub-breadcrumb-menu>
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="footer">
+    <i class="fal fa-copyright"></i>
+    <span class="cursor-debug"
+          [tooltip]="debug_click.get_message()"
+          triggers="click mouseenter:mouseleave mousedown:mouseup"
+          container="body"
+          (click)="debug_toogle($event)">Finqi</span>
+    <span>{{ getYear() }}.</span>
+    <span>Todos os direitos reservados.</span>
+  </div>
+</div>

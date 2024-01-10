@@ -1,0 +1,55 @@
+
+<div class="row">
+  <!-- Nome -->
+  <div class="col-md-4 form-group">
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name">
+  </div>
+  <!-- Idade -->
+  <div class="col-md-2 form-group">
+    <label for="age">Age:</label>
+    <input type="number" class="form-control" id="age" [(ngModel)]="age" name="age">
+  </div>
+  <!-- CPF -->
+  <div class="col-md-3 form-group">
+    <label for="cpf">CPF:</label>
+    <input type="text" class="form-control" id="cpf" maxlength="12" [(ngModel)]="cpf" (ngModelChange)="validadeCpf(cpf)">
+  </div>
+  <!-- Email -->
+  <div class="col-md-3 form-group">
+    <label for="email">Email:</label>
+    <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email">
+  </div>
+</div>
+<div class="row">
+  <!-- Gênero -->
+  <div class="col-md-3 form-group">
+    <label for="gender">Gender:</label>
+    <select class="form-control" id="gender" [(ngModel)]="gender" name="gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+  <!-- País -->
+  <div class="col-md-3 form-group">
+    <label for="country">Country:</label>
+    <input type="text" class="form-control" id="country" [(ngModel)]="country" name="country">
+  </div>
+  <!-- Categoria -->
+  <div class="col-md-3 form-group">
+    <label for="category">Category:</label>
+    <input type="text" class="form-control" id="category" [(ngModel)]="category" name="category">
+  </div>
+  <!-- Especialidade -->
+  <div class="col-md-3 form-group">
+    <label for="specialty">Specialty:</label>
+    <input type="text" class="form-control" id="specialty" [(ngModel)]="specialty" name="specialty">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <button type="submit" class="btn btn-primary btn-block">Save</button>
+  </div>
+</div>
+

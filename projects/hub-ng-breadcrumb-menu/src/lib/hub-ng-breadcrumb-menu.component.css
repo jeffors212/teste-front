@@ -1,0 +1,37 @@
+.breadcrumb-container {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-container.sticky {
+  position: sticky;
+  top: 0px;
+  z-index: 1050;
+}
+
+.breadcrumb .breadcrumb {
+  background: transparent;
+  padding: 0;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.breadcrumb-item {
+  /*text-transform: lowercase;*/
+}
+
+.breadcrumb-nav + * {
+  margin: 0 1rem ;
+}
+
+.breadcrumb-center-content {
+  flex: 2;
+}
+
+.breadcrumb-right-content {
+}
+
+.red {
+  background-color: red;
+}
+
